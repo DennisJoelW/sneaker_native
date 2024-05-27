@@ -1,7 +1,6 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { Tabs, Redirect } from 'expo-router';
-
 import { icons } from '../../constants'
 
 const TabIcon = ({ icon, color, name, focused, imgSize}) => {
@@ -13,7 +12,7 @@ const TabIcon = ({ icon, color, name, focused, imgSize}) => {
         resizeMode='contain'
         className = {` ${imgSize} items-center`}
       />
-      <Text className={`${focused ? 'font-psemibold' : 'font-pregular'} text-xs`}>
+      <Text className={`${focused ? 'font-psemibold text-[#40A578]' : 'font-pregular'} text-xs`}>
         {name}
       </Text>
     </View>
@@ -31,7 +30,6 @@ const TabsLayout = () => {
           alignContent: 'center',
           justifyContent: 'center',
           display: 'flex',
-          paddingTop: 20,
           borderTopColor: "black",
         }
         }}>
