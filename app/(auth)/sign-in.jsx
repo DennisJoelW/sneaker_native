@@ -1,8 +1,10 @@
-import { View, Text, SafeAreaView, ScrollView, Image} from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, SafeAreaView, ScrollView, Image, Alert} from 'react-native'
+import React, { useState, useEffect } from 'react'
 import shoes_login from '../../assets/shoes-login.png'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
+import { Link, router } from 'expo-router'
+import { checkSession, signIn } from '../../lib/appwrite'
 
 
 const SignIn = () => {
@@ -13,17 +15,38 @@ const SignIn = () => {
   })
 
   const [isUserTyping, setIsUserTyping] = useState(false)
-
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const submit = () => {
+  useEffect(() => {
+    const verifySession = async () => {
+      try {
+        const session = await checkSession();
+        if (session) {
+          router.replace('/home'); // Redirect to home if session exists
+        }
+      } catch (error) {
+        console.log('No active session', error);
+      }
+    };
+    verifySession();
+  }, []);
 
+  const submit = async () => {   
+    setIsSubmitting(true);
+      try {
+        await signIn(form.email, form.password)
+        router.replace('/home')
+      } catch (error) {
+        Alert.alert('Error', error.message)
+      } finally{
+        setIsSubmitting(false)
+      }
   }
 
   return (
     <SafeAreaView className = ' h-full bg-white'>
       <ScrollView contentContainerStyle={{height:'100%'}}>
-        <View className=' w-full h-fit items-end pl-2'>
+        <View className=' w-full h-fit items-center pl-2'>
             <Image
               source={shoes_login}
               className = {`max-w-[320px] w-full ${isUserTyping ? 'h-[150px]' : 'h-[230px]'}`}
@@ -62,7 +85,7 @@ const SignIn = () => {
               isLoading={isSubmitting}
             />
 
-            <Text className=' text-center mt-3 text-gray-800 text-[15px] font-pregular'>Dont have an account ? <Text className=' font-psemibold'>Sign up</Text></Text>
+            <Text className=' text-center mt-3 text-gray-800 text-[15px] font-pregular'>Dont have an account ? <Link href={"/sign-up"} className=' font-psemibold'>Sign up</Link></Text>
 
         </View>
       </ScrollView>

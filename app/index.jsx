@@ -1,11 +1,15 @@
 import { StatusBar } from 'expo-status-bar';
-import { ScrollView, Text, View, Image } from 'react-native';
+import { ScrollView, Text, View, Image, ActivityIndicator } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import floating_shoes from '../assets/floating-shoes.gif'
 import CustomButton from '../components/CustomButton';
+import { checkSession } from '../lib/appwrite';
+import { useEffect, useState } from 'react';
 
 export default function App() {
+
+
   return (
     <SafeAreaView className = ' h-full bg-white'>
       <ScrollView contentContainerStyle={{ height: '100%'}}>
@@ -25,7 +29,9 @@ export default function App() {
 
           <CustomButton 
             title='Explore Now'
-            handlePress={() => router.push('./sign-in')}
+            handlePress={() => {
+                router.push('/sign-in')
+            }}
           
           >
 
@@ -34,7 +40,6 @@ export default function App() {
       </ScrollView>
 
       <StatusBar backgroundColor='' style='dark'/>
-      {/* <Link href="/home" style={{color: 'blue'}}>Go to Home</Link> */}
     </SafeAreaView>
   );
 }
