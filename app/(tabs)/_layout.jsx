@@ -29,6 +29,7 @@ const TabsLayout = () => {
       <Tabs screenOptions={{ 
         tabBarShowLabel:false,
         tabBarActiveTintColor:"#40A578",
+        tabBarHideOnKeyboard:true,
         tabBarStyle:{
           height: 88,
           alignContent: 'center',

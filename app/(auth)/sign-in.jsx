@@ -83,6 +83,7 @@ const SignIn = () => {
               onFocus={() => setIsUserTyping(true)}
               onBlur={() => setIsUserTyping(false)}
               keyboardType="email-address"
+              placeholder={"Email"}
             />
 
             <FormField
@@ -93,6 +94,7 @@ const SignIn = () => {
               handleOnType={(e) => {
                 setform({ ...form, password:e})
               }}
+              placeholder={"Password"}
             />
 
             <CustomButton 

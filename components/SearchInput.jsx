@@ -2,13 +2,12 @@ import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import icons from '../constants/icons'
 
-const FormField = ({title, value, placeholder, handleOnType, extraStyles, inputStyles, onFocus, ...props}) => {
+const SearchInput = ({title, value, placeholder, handleOnType, extraStyles, inputStyles, onFocus, ...props}) => {
 
   const [showPass, setShowPass] = useState(false)
 
   return (
     <View className={` space-y-2  mx-6 ${extraStyles}`}>
-      <Text className=' text-[14px] text-gray-700 font-pmedium mb-[-2px] ml-1'>{title}</Text>
       
       <View className={` w-full h-[56px] border-2 border-gray-400 rounded-xl mb-2 focus:border-[#40A578] flex-row items-center ${inputStyles} `}>
         <TextInput 
@@ -20,25 +19,18 @@ const FormField = ({title, value, placeholder, handleOnType, extraStyles, inputS
           secureTextEntry={title === 'Password' && !showPass}
 
         />
-
-
-          {title === 'Password' && 
-          <TouchableOpacity
-            onPress={() => {
-              setShowPass(!showPass)
-            }}>
-              <Image 
-                source={ !showPass ? icons.eye : icons.eyeHide}
-                className=' w-[26px] h-[26px] mr-3'
-                resizeMode='contain'
-              
-              ></Image>
-
-          </TouchableOpacity> }
+        <TouchableOpacity>
+            <Image 
+                source={icons.search}
+                tintColor={"#A0A0A0"}
+                className='w-5 h-5 mr-2'
+                resizeMethod='contain'
+            />
+        </TouchableOpacity>
 
       </View>
     </View>
   )
 }
 
-export default FormField
+export default SearchInput

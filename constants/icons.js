@@ -12,6 +12,9 @@ import eyeHide from "../assets/icons/eye-hide.png";
 import eye from "../assets/icons/eye.png";
 import play from "../assets/icons/play.png";
 import grocery from "../assets/icons/grocery-store.png";
+import settings from "../assets/icons/settings.png";
+import shopcart from "../assets/icons/shopping-cart.png";
+
 
 
 export default {
@@ -28,5 +31,7 @@ export default {
   logout,
   eyeHide,
   eye,
-  grocery
+  grocery,
+  settings,
+  shopcart
 };

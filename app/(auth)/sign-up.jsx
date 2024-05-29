@@ -1,4 +1,4 @@
-import { View, Text, SafeAreaView, ScrollView, Image, Alert} from 'react-native'
+import { View, Text, SafeAreaView, ScrollView, Image, Alert, KeyboardAvoidingView} from 'react-native'
 import React, { useState } from 'react'
 import shoes_login from '../../assets/shoes-singup.png'
 import FormField from '../../components/FormField'
@@ -49,7 +49,7 @@ const SignUp = () => {
         <View className=' w-full h-fit items-center pl-2'>
             <Image
               source={shoes_login}
-              className = {`max-w-[310px] w-full ${isUserTyping ? 'h-[100px] mb-2' : 'h-[200px]'}`}
+              className = {`max-w-[310px] w-full ${isUserTyping ? 'h-[100px] mb-2 mt-4' : 'h-[200px] mt-2'}`}
               resizeMode='contain'
             />
         </View>
@@ -65,6 +65,7 @@ const SignUp = () => {
               }}
               onFocus={() => setIsUserTyping(true)}
               onBlur={() => setIsUserTyping(false)}
+              placeholder={"Username"}
             />
 
             <FormField
@@ -76,6 +77,7 @@ const SignUp = () => {
               onFocus={() => setIsUserTyping(true)}
               onBlur={() => setIsUserTyping(false)}
               keyboardType="email-address"
+              placeholder={"Email"}
             />
 
             <FormField
@@ -86,6 +88,7 @@ const SignUp = () => {
               handleOnType={(e) => {
                 setform({ ...form, password:e})
               }}
+              placeholder={"Password"}
             />
 
             <CustomButton 
