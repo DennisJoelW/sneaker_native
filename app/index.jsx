@@ -6,9 +6,13 @@ import floating_shoes from '../assets/floating-shoes.gif'
 import CustomButton from '../components/CustomButton';
 import { checkSession } from '../lib/appwrite';
 import { useEffect, useState } from 'react';
+import { useGlobalContext} from '../context/GlobalProvider';
 
 export default function App() {
 
+  const { isLoading, isLoggedIn } = useGlobalContext();
+
+  if (!isLoading && isLoggedIn) return <Redirect href="/home" />;
 
   return (
     <SafeAreaView className = ' h-full bg-white'>
@@ -30,6 +34,9 @@ export default function App() {
           <CustomButton 
             title='Explore Now'
             handlePress={() => {
+              if(isLoggedIn){
+                router.push('/home')
+              }
                 router.push('/sign-in')
             }}
           

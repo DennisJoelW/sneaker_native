@@ -3,8 +3,10 @@ import React, { useState, useEffect } from 'react'
 import shoes_login from '../../assets/shoes-login.png'
 import FormField from '../../components/FormField'
 import CustomButton from '../../components/CustomButton'
-import { Link, router } from 'expo-router'
-import { checkSession, signIn } from '../../lib/appwrite'
+import { Link, Redirect, router } from 'expo-router'
+import { checkSession, getCurrentUser, logout, signIn } from '../../lib/appwrite'
+import { useGlobalContext } from '../../context/GlobalProvider'
+
 
 
 const SignIn = () => {
@@ -17,12 +19,18 @@ const SignIn = () => {
   const [isUserTyping, setIsUserTyping] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  const { setUser, setIsLoggedIn, isLoggedIn } = useGlobalContext();
+
+
   useEffect(() => {
     const verifySession = async () => {
       try {
         const session = await checkSession();
         if (session) {
           router.replace('/home'); // Redirect to home if session exists
+          setIsLoggedIn(true)
+        }else{
+          setIsLoggedIn(false)
         }
       } catch (error) {
         console.log('No active session', error);
@@ -34,13 +42,22 @@ const SignIn = () => {
   const submit = async () => {   
     setIsSubmitting(true);
       try {
-        await signIn(form.email, form.password)
+        await signIn(form.email, form.password);
+        const result = await getCurrentUser();  
+        setUser(result);
+        setIsLoggedIn(true);
+        console.log(result)
+        
         router.replace('/home')
       } catch (error) {
         Alert.alert('Error', error.message)
       } finally{
         setIsSubmitting(false)
       }
+  }
+
+  if(isLoggedIn){
+    return <Redirect href={"/home"}/>
   }
 
   return (

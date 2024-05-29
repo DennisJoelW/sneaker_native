@@ -2,6 +2,7 @@ import { View, Text, Image } from 'react-native'
 import React from 'react'
 import { Tabs, Redirect } from 'expo-router';
 import { icons } from '../../constants'
+import { useGlobalContext } from '../../context/GlobalProvider';
 
 const TabIcon = ({ icon, color, name, focused, imgSize}) => {
   return (
@@ -20,6 +21,9 @@ const TabIcon = ({ icon, color, name, focused, imgSize}) => {
 }
 
 const TabsLayout = () => {
+
+
+
   return (
     <>
       <Tabs screenOptions={{ 
