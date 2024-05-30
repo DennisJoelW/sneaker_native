@@ -11,7 +11,7 @@ const CustomButton = ({ title, handlePress, containerStyles, textStyles, isLoadi
         activeOpacity={0.75}
         onPress={handlePress}
     >
-      <Text className = ' text-white text-center justify-center font-psemibold text-lg'>{title}</Text>
+      <Text className = {` text-white text-center justify-center font-psemibold text-lg ${textStyles} `}>{title}</Text>
     </TouchableOpacity>
   )
 }

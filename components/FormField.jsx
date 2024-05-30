@@ -12,7 +12,7 @@ const FormField = ({title, value, placeholder, handleOnType, extraStyles, inputS
       
       <View className={` w-full h-[56px] border-2 border-gray-400 rounded-xl mb-2 focus:border-[#40A578] flex-row items-center ${inputStyles} `}>
         <TextInput 
-          className=" flex-1 text-gray-600 font-psemibold text-[14px] mx-2"
+          className=" flex-1 text-gray-600 font-psemibold text-[14px] px-2 h-full"
           value={value}
           placeholder={placeholder}
           onChangeText={handleOnType}

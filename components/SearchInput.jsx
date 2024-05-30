@@ -22,8 +22,8 @@ const SearchInput = ({title, value, placeholder, handleOnType, extraStyles, inpu
         <TouchableOpacity>
             <Image 
                 source={icons.search}
-                tintColor={"#A0A0A0"}
-                className='w-5 h-5 mr-2'
+                tintColor={"#40A578"}
+                className='w-[18px] h-[18px] mr-3'
                 resizeMethod='contain'
             />
         </TouchableOpacity>

@@ -14,6 +14,8 @@ import play from "../assets/icons/play.png";
 import grocery from "../assets/icons/grocery-store.png";
 import settings from "../assets/icons/settings.png";
 import shopcart from "../assets/icons/shopping-cart.png";
+import add from "../assets/icons/add.png";
+
 
 
 
@@ -33,5 +35,6 @@ export default {
   eye,
   grocery,
   settings,
-  shopcart
+  shopcart,
+  add
 };
