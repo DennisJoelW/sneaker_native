@@ -60,14 +60,15 @@ const Home = () => {
     <SafeAreaView className=''>
       <FlatList 
         data={sneakers}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item.$id}
         renderItem={({ item }) => (
           <View className='px-4'>
               <SneakersCard 
-                  posts={sneakers}
+                  posts={item}
               />
           </View>
         )}
+
         ListHeaderComponent={() => (
           <View className='mb-4'>
 

@@ -4,8 +4,7 @@ import CustomButton from './CustomButton'
 
 import icons from '../constants/icons'
 
-const SneakersCard = ({posts}) => {
-
+const SneakersCard = ({ posts }) => {
     
   function formatNumberWithCommas(number) {
     // Check if the input is a valid number
@@ -33,27 +32,21 @@ const SneakersCard = ({posts}) => {
   }
 
   return (
-    <FlatList 
-        data={posts}
-        keyExtractor={(item) => item.$id}
-        renderItem={({ item }) => (
-
             <TouchableOpacity
                 activeOpacity={0.8}
-                key={item.$id}
             >
                 <View className=' w-1/2 h-fit bg-gray-200 rounded-2xl items-center px-3 pb-6 mb-4 border-2 border-gray-300'>
                     <Image
-                        source={{uri:item.sneakersImage}}
+                        source={{uri:posts.sneakersImage}}
                         className='mt-[-35px]'
                         style={{ width:150, height:150}}
                         resizeMode='contain'
                     />
 
-                    <Text className=' font-psemibold text-[13px] w-full mb-4 mt-1'>{item.sneakersName}</Text>
+                    <Text className=' font-psemibold text-[13px] w-full mb-4 mt-1'>{posts.sneakersName}</Text>
                     
                     <View className='flex-row justify-between flex w-full'>
-                        <Text className='font-psemibold text-[12px] text-[#40A578]'>IDR {formatNumberWithCommas(item.sneakersPrice)}</Text>
+                        <Text className='font-psemibold text-[12px] text-[#40A578]'>IDR {formatNumberWithCommas(posts.sneakersPrice)}</Text>
                         
                         <TouchableOpacity
                             activeOpacity={0.6}
@@ -70,10 +63,7 @@ const SneakersCard = ({posts}) => {
                     </View>
                 </View>
             </TouchableOpacity>
-
-        )}
-    />
-  )
+        )
 }
 
 export default SneakersCard
