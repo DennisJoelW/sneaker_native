@@ -33,9 +33,9 @@ const SneakersCard = ({ posts }) => {
 
   return (
             <TouchableOpacity
-                activeOpacity={0.8}
+                activeOpacity={0.7}
             >
-                <View className=' w-1/2 h-fit bg-gray-200 rounded-2xl items-center px-3 pb-6 mb-4 border-2 border-gray-300'>
+                <View className='h-fit bg-gray-200 rounded-2xl items-center px-3 pb-6 mb-4 border-2 border-gray-300'>
                     <Image
                         source={{uri:posts.sneakersImage}}
                         className='mt-[-35px]'
@@ -43,17 +43,17 @@ const SneakersCard = ({ posts }) => {
                         resizeMode='contain'
                     />
 
-                    <Text className=' font-psemibold text-[13px] w-full mb-4 mt-1'>{posts.sneakersName}</Text>
+                    <Text className=' font-psemibold text-[13px] w-full mb-4 mt-1' numberOfLines={2} ellipsizeMode='tail'>{posts.sneakersName}</Text>
                     
                     <View className='flex-row justify-between flex w-full'>
-                        <Text className='font-psemibold text-[12px] text-[#40A578]'>IDR {formatNumberWithCommas(posts.sneakersPrice)}</Text>
+                        <Text className='font-psemibold text-[12px] text-[#40A578]' 
+                            >IDR {formatNumberWithCommas(posts.sneakersPrice)}</Text>
                         
                         <TouchableOpacity
                             activeOpacity={0.6}
                         >
                             <Image
                                 source={icons.add}
-                                className=' mr-1'
                                 style={{width:25, height:25}}
                                 resizeMode='contain'
                                 tintColor={"#40A578"}

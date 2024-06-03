@@ -1,10 +1,15 @@
 import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native'
 import React, { useState } from 'react'
 import icons from '../constants/icons'
+import { router, usePathname } from 'expo-router'
 
 const SearchInput = ({title, value, placeholder, handleOnType, extraStyles, inputStyles, onFocus, ...props}) => {
 
   const [showPass, setShowPass] = useState(false)
+
+  const pathname = usePathname()
+
+  const [query, setQuery] = useState('')
 
   return (
     <View className={` space-y-2  mx-6 ${extraStyles}`}>
@@ -12,14 +17,24 @@ const SearchInput = ({title, value, placeholder, handleOnType, extraStyles, inpu
       <View className={` w-full h-[56px] border-2 border-gray-400 rounded-xl mb-2 focus:border-[#40A578] flex-row items-center ${inputStyles} `}>
         <TextInput 
           className=" flex-1 text-gray-600 font-psemibold text-[14px] mx-2"
-          value={value}
+          value={query}
           placeholder={placeholder}
-          onChangeText={handleOnType}
+          onChangeText={(e) => setQuery(e)}
           onFocus={onFocus}
           secureTextEntry={title === 'Password' && !showPass}
 
         />
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            if(!query){
+              return null
+            }
+
+            if (pathname.startsWith('/search')) router.
+            setParams({query})
+            else router.push(`/search/${query}`)
+          }}
+        >
             <Image 
                 source={icons.search}
                 tintColor={"#40A578"}

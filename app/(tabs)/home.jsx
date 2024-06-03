@@ -1,4 +1,4 @@
-import { View, Text, FlatList, TouchableOpacity, Image, RefreshControl, Alert } from 'react-native'
+import { View, Text, FlatList, TouchableOpacity, Image, RefreshControl, Alert, Dimensions, StyleSheet } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import GlobalProvider, { useGlobalContext } from '../../context/GlobalProvider';
 import { Redirect } from 'expo-router';
@@ -13,6 +13,9 @@ import CustomButton from '../../components/CustomButton';
 import jordan from '../../assets/jordan.png'
 import SneakersCard from '../../components/SneakersCard';
 
+const width = Dimensions.get('window').width
+
+
 
 const Home = () => {
 
@@ -20,6 +23,9 @@ const Home = () => {
 
   const {isLoggedIn, user, getUser} = useGlobalContext()
   const [refreshing, setRefreshing] = useState(false)
+
+  const {itemStyle, columnWrapper} = styles
+
 
   if(!isLoggedIn){
     return(
@@ -37,7 +43,7 @@ const Home = () => {
 
   const Navbar = () => {
     return(
-      <View className=' w-[100%] px-4 pt-4 flex-row items-center justify-between mb-4'>
+      <View className=' w-[100%] pt-4 flex-row items-center justify-between mb-4'>
       <Image
         source={icons.settings}
         className=' w-8 h-8 ml-1'
@@ -59,14 +65,17 @@ const Home = () => {
   return (
     <SafeAreaView className=''>
       <FlatList 
+      className='px-4'
         data={sneakers}
         keyExtractor={(item) => item.$id}
+        numColumns={2}
+        columnWrapperStyle={styles.columnWrapper}
         renderItem={({ item }) => (
-          <View className='px-4'>
-              <SneakersCard 
-                  posts={item}
-              />
-          </View>
+            <View style={itemStyle}>
+                <SneakersCard 
+                    posts={item}
+                />
+            </View>
         )}
 
         ListHeaderComponent={() => (
@@ -75,12 +84,12 @@ const Home = () => {
               <Navbar />
 
               <SearchInput
-                extraStyles={"mx-4"}
+                extraStyles={"mx-0"}
                 inputStyles={" bg-gray-200 h-[50px] border-1 border-gray-200 rounded-2xl"}
                 placeholder={"Search"}
               />
 
-              <View className='px-4 mt-3'>
+              <View className='mt-3'>
 
                 <View className=' w-[100%] h-fit bg-gray-300 rounded-xl px-4 flex-row items-center justify-center'>
 
@@ -123,5 +132,16 @@ const Home = () => {
     </SafeAreaView>
   )
 }
+
+const styles = StyleSheet.create({
+  columnWrapper: {
+    columnGap: 12
+  },
+  itemStyle : {
+    flex: 1,
+    margin: 1,
+    height: '100%',
+  }
+})
 
 export default Home
