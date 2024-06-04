@@ -12,6 +12,7 @@ import useAppWrite from '../../lib/useAppWrite';
 import CustomButton from '../../components/CustomButton';
 import jordan from '../../assets/jordan.png'
 import SneakersCard from '../../components/SneakersCard';
+import NavbarCom from '../../components/NavbarCom';
 
 const width = Dimensions.get('window').width
 
@@ -19,12 +20,17 @@ const width = Dimensions.get('window').width
 
 const Home = () => {
 
+  const brands = ["All", "Nike", "Adidas", "Reebok", "Puma", "Under Armour", "Converse", "Vans", "New Balance", "Asics", "Skechers"];
+
+
   const {data: sneakers, refetch, isLoading} = useAppWrite(getSneakers);
 
   const {isLoggedIn, user, getUser} = useGlobalContext()
   const [refreshing, setRefreshing] = useState(false)
 
   const {itemStyle, columnWrapper} = styles
+
+  const [selectedBrand, setSelectedBrand] = useState("All")
 
 
   if(!isLoggedIn){
@@ -39,27 +45,20 @@ const Home = () => {
     setRefreshing(false)
   }
 
-  console.log(sneakers)
 
-  const Navbar = () => {
-    return(
-      <View className=' w-[100%] pt-4 flex-row items-center justify-between mb-4'>
-      <Image
-        source={icons.settings}
-        className=' w-8 h-8 ml-1'
-        resizeMode='contain'
-      />
+  const sneakerBrand = ({item}) =>{
+    const isActive = item === selectedBrand;
 
-      <Text className='text-2xl font-psemibold pt-1 text-[#40A578]'>Sneakerz</Text>
-
-      <Image
-        source={icons.shopcart}
-        className=' w-8 h-8 mr-1'
-        resizeMode='contain'
-      />
-
-    </View>
+    return (
+      <TouchableOpacity
+        onPress={() => setSelectedBrand(item)}
+      >
+        <View className={`px-4 py-4 mt-4 mb-2 rounded-xl mr-3 ${isActive ? "bg-black" : 'bg-gray-200'}`}>
+          <Text className={`font-pregular text-[14px] ${isActive ? "text-white" : "text-gray-700"}`}>{item}</Text>
+        </View>
+      </TouchableOpacity>
     )
+
   }
 
   return (
@@ -81,7 +80,9 @@ const Home = () => {
         ListHeaderComponent={() => (
           <View className='mb-4'>
 
-              <Navbar />
+              <NavbarCom
+                leftIcon={icons.settings}
+              />
 
               <SearchInput
                 extraStyles={"mx-0"}
@@ -120,7 +121,14 @@ const Home = () => {
 
                 </View>
 
-              </View>  
+              </View> 
+
+              <FlatList
+                data={brands}
+                keyExtractor={(item) => item.$id}
+                horizontal
+                renderItem={sneakerBrand}
+              /> 
 
           </View>
           )}
