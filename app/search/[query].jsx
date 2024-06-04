@@ -8,8 +8,9 @@ import useAppWrite from '../../lib/useAppWrite';
 import icons from '../../constants/icons'
 import { searchSneakers } from '../../lib/appwrite';
 import SneakersCard from '../../components/SneakersCard';
+import NavbarCom from '../../components/NavbarCom';
 
-const Search = () => {
+const Search =  () => {
   const { query } = useLocalSearchParams();
 
   const { data: sneakers, refetch, isLoading} = useAppWrite(
@@ -26,60 +27,77 @@ const Search = () => {
     setRefreshing(false)
   }
 
-  const Navbar = () => {
-    return(
-      <View className=' w-[100%] pt-4 flex-row items-center justify-between mb-4'>
-      <Image
-        source={icons.settings}
-        className=' w-8 h-8 ml-1'
-        resizeMode='contain'
+  useEffect(() => {
+    refetch()
+  }, [query])
+
+  if(isLoading){
+    return (
+      <SafeAreaView className='px-4 mb-4'>
+  
+      <NavbarCom
+        leftIcon = {icons.back}
       />
 
-      <Text className='text-2xl font-psemibold pt-1 text-[#40A578]'>Sneakerz</Text>
+      <Text className='font-pregular text-sm ml-1'>Searched : <Text className=' font-psemibold'>{query}</Text></Text>
 
-      <Image
-        source={icons.shopcart}
-        className=' w-8 h-8 mr-1'
-        resizeMode='contain'
-      />
-
-    </View>
+      </SafeAreaView>
     )
   }
 
-  return (
-    <SafeAreaView className=''>
-      <FlatList 
-      className='px-4'
-        data={sneakers}
-        keyExtractor={(item) => item.$id}
-        numColumns={2}
-        columnWrapperStyle={styles.columnWrapper}
-        renderItem={({ item }) => (
-            <View style={itemStyle}>
-                <SneakersCard 
-                    posts={item}
-                />
-            </View>
-        )}
-
-        ListHeaderComponent={() => (
-          <View className='mb-4'>
-
-              <Navbar />
-
-              <Text>Searched : {query}</Text>
-
-          </View>
+  if(!isLoading){
+    return (
+      <SafeAreaView className=''>
+        <FlatList 
+        className='px-4'
+          data={sneakers}
+          keyExtractor={(item) => item.$id}
+          numColumns={2}
+          columnWrapperStyle={styles.columnWrapper}
+          renderItem={({ item }) => (
+              <View style={itemStyle}>
+                  <SneakersCard 
+                      posts={item}
+                  />
+              </View>
           )}
-         refreshControl={<RefreshControl
-              refreshing={refreshing}
-              onRefresh={onRefresh}
-          />} 
-      />
+  
+          ListHeaderComponent={() => (
+            <View className='mb-4'>
+  
+                <NavbarCom
+                  leftIcon = {icons.back}
+                />
+  
+                <Text className='font-pregular text-sm ml-1'>Searched : <Text className=' font-psemibold'>{query}</Text></Text>
+  
+            </View>
+            )}
 
-    </SafeAreaView>
-  )
+            refreshControl={<RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+              />} 
+    
+            ListEmptyComponent={() => (
+              <View className=' w-full items-center h-[40vh] justify-center'>
+                  <Image
+                    source={icons.notFound}
+                    style={{width: 150, height:150}}
+                    resizeMode='contain'
+                  />
+                  <Text className=' font-psemibold mt-4'>SNEAKERS NOT FOUND</Text>
+                  <Text className=' font-pregular'>No sneakers found for this search</Text>
+  
+              </View>
+            )}
+  
+        />
+  
+      </SafeAreaView>
+    )
+  }
+
 }
 
 const styles = StyleSheet.create({

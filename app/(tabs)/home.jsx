@@ -87,6 +87,7 @@ const Home = () => {
                 extraStyles={"mx-0"}
                 inputStyles={" bg-gray-200 h-[50px] border-1 border-gray-200 rounded-2xl"}
                 placeholder={"Search"}
+                value={""}
               />
 
               <View className='mt-3'>

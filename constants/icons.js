@@ -15,6 +15,8 @@ import grocery from "../assets/icons/grocery-store.png";
 import settings from "../assets/icons/settings.png";
 import shopcart from "../assets/icons/shopping-cart.png";
 import add from "../assets/icons/add.png";
+import back from "../assets/icons/back.png";
+import notFound from "../assets/icons/not-found.png";
 
 
 
@@ -36,5 +38,7 @@ export default {
   grocery,
   settings,
   shopcart,
-  add
+  add,
+  back,
+  notFound
 };

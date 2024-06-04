@@ -11,6 +11,16 @@ const SearchInput = ({title, value, placeholder, handleOnType, extraStyles, inpu
 
   const [query, setQuery] = useState('')
 
+  const handleSearch = () => {
+    if (!query) return null;
+
+    if (pathname.startsWith('/search')) {
+      router.setParams({query});
+    } else {
+      router.push(`/search/${query}`);
+    }
+  };
+
   return (
     <View className={` space-y-2  mx-6 ${extraStyles}`}>
       
@@ -22,25 +32,19 @@ const SearchInput = ({title, value, placeholder, handleOnType, extraStyles, inpu
           onChangeText={(e) => setQuery(e)}
           onFocus={onFocus}
           secureTextEntry={title === 'Password' && !showPass}
+          onSubmitEditing={handleSearch}
 
         />
         <TouchableOpacity
-          onPress={() => {
-            if(!query){
-              return null
-            }
-
-            if (pathname.startsWith('/search')) router.
-            setParams({query})
-            else router.push(`/search/${query}`)
-          }}
+          onPress={handleSearch}
         >
             <Image 
                 source={icons.search}
                 tintColor={"#40A578"}
-                className='w-[18px] h-[18px] mr-3'
+                className='w-[19px] h-[19px] mr-3'
                 resizeMethod='contain'
             />
+
         </TouchableOpacity>
 
       </View>
