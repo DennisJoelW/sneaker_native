@@ -1,5 +1,5 @@
 import { View, Text, FlatList, TouchableOpacity, Image, RefreshControl, Alert, Dimensions, StyleSheet } from 'react-native'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import GlobalProvider, { useGlobalContext } from '../../context/GlobalProvider';
 import { Redirect } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -17,11 +17,9 @@ import NavbarCom from '../../components/NavbarCom';
 const width = Dimensions.get('window').width
 
 
-
 const Home = () => {
 
   const brands = ["All", "Nike", "Adidas", "Reebok", "Puma", "Under Armour", "Converse", "Vans", "New Balance", "Asics", "Skechers"];
-
 
   const {data: sneakers, refetch, isLoading} = useAppWrite(getSneakers);
 
@@ -31,6 +29,8 @@ const Home = () => {
   const {itemStyle, columnWrapper} = styles
 
   const [selectedBrand, setSelectedBrand] = useState("All")
+
+  const flatListRef = useRef(null);
 
 
   if(!isLoggedIn){
@@ -45,8 +45,10 @@ const Home = () => {
     setRefreshing(false)
   }
 
+  console.log(selectedBrand)
+  
 
-  const sneakerBrand = ({item}) =>{
+  const SneakerBrand = ({item}) =>{
     const isActive = item === selectedBrand;
 
     return (
@@ -54,12 +56,13 @@ const Home = () => {
         onPress={() => setSelectedBrand(item)}
       >
         <View className={`px-4 py-4 mt-4 mb-2 rounded-xl mr-3 ${isActive ? "bg-black" : 'bg-gray-200'}`}>
-          <Text className={`font-pregular text-[14px] ${isActive ? "text-white" : "text-gray-700"}`}>{item}</Text>
+          <Text className={`font-pregular text-[14px] ${isActive ? "text-white font-psemibold" : "text-gray-700"}`}>{item}</Text>
         </View>
       </TouchableOpacity>
     )
 
   }
+
 
   return (
     <SafeAreaView className=''>
@@ -82,6 +85,7 @@ const Home = () => {
 
               <NavbarCom
                 leftIcon={icons.settings}
+                title={"Sneakerz"}
               />
 
               <SearchInput
@@ -127,7 +131,12 @@ const Home = () => {
                 data={brands}
                 keyExtractor={(item) => item.$id}
                 horizontal
-                renderItem={sneakerBrand}
+                renderItem={({item}) => (
+                  <SneakerBrand 
+                    item={item}
+                  />
+                )}
+
               /> 
 
           </View>

@@ -43,10 +43,10 @@ const SignIn = () => {
     setIsSubmitting(true);
       try {
         await signIn(form.email, form.password);
-        const result = await getCurrentUser();  
+        const result = await getCurrentUser();
+
         setUser(result);
         setIsLoggedIn(true);
-        console.log(result)
         
         router.replace('/home')
       } catch (error) {
