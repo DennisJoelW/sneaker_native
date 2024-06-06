@@ -17,6 +17,8 @@ import shopcart from "../assets/icons/shopping-cart.png";
 import add from "../assets/icons/add.png";
 import back from "../assets/icons/back.png";
 import notFound from "../assets/icons/not-found.png";
+import favorite from "../assets/icons/favorite.png";
+import favorite_filled from "../assets/icons/favorite_filled.png";
 
 
 
@@ -40,5 +42,7 @@ export default {
   shopcart,
   add,
   back,
-  notFound
+  notFound,
+  favorite,
+  favorite_filled
 };

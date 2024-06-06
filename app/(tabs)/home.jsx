@@ -13,6 +13,9 @@ import CustomButton from '../../components/CustomButton';
 import jordan from '../../assets/jordan.png'
 import SneakersCard from '../../components/SneakersCard';
 import NavbarCom from '../../components/NavbarCom';
+import { router, usePathname} from 'expo-router'
+import { Route } from 'expo-router/build/Route';
+
 
 const width = Dimensions.get('window').width
 
@@ -31,6 +34,8 @@ const Home = () => {
   const [selectedBrand, setSelectedBrand] = useState("All")
 
   const flatListRef = useRef(null);
+
+  const pathname = usePathname()
 
 
   if(!isLoggedIn){
@@ -63,6 +68,13 @@ const Home = () => {
 
   }
 
+  const onSneakerPress = (item) => {
+    // Use router.push to navigate and pass parameters
+    router.push({
+      pathname: '/sneakerDetail/[SneakerDetail]',
+      params: { id: 2, sneakers: JSON.stringify(item)}, // Convert the item to a string to pass as a param
+    });
+  };
 
   return (
     <SafeAreaView className=''>
@@ -76,6 +88,7 @@ const Home = () => {
             <View style={itemStyle}>
                 <SneakersCard 
                     posts={item}
+                    sneakerPress={() => onSneakerPress(item)}
                 />
             </View>
         )}

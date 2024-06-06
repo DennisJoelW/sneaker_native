@@ -48,14 +48,7 @@ const Profile = () => {
         />
 
       </View>
-      {/* <View>
-        <TouchableOpacity onPress={handleLogout}>
-          <Image 
-            source={icons.logout}
-            tintColor={'#40A578'}
-          />
-        </TouchableOpacity>
-      </View> */}
+
     </SafeAreaView>
   )
 }

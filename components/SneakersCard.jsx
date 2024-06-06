@@ -4,9 +4,9 @@ import CustomButton from './CustomButton'
 
 import icons from '../constants/icons'
 
-const SneakersCard = ({ posts }) => {
+const SneakersCard = ({ posts, sneakerPress }) => {
     
-  function formatNumberWithCommas(number) {
+   function formatNumberWithCommas(number) {
     // Check if the input is a valid number
     if (isNaN(number)) {
       return "Invalid number";
@@ -34,6 +34,7 @@ const SneakersCard = ({ posts }) => {
   return (
             <TouchableOpacity
                 activeOpacity={0.7}
+                onPress={sneakerPress}
             >
                 <View className='h-fit bg-gray-200 rounded-2xl items-center px-3 pb-6 mb-4 border-2 border-gray-300'>
                     <Image
