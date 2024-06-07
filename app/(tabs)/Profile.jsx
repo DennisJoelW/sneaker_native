@@ -8,10 +8,11 @@ import { router } from 'expo-router'
 import { useGlobalContext } from '../../context/GlobalProvider'
 import useAppWrite from '../../lib/useAppWrite'
 import NavbarCom from '../../components/NavbarCom'
+import CustomButton from '../../components/CustomButton'
 
-const Profile = () => {
+const Profile =  () => {
 
-  const { user, setUser, setIsLoggedIn} = useGlobalContext()
+  const { user, setUser, setIsLoggedIn} =  useGlobalContext()
 
   const handleLogout = async () => {
     try {
@@ -36,13 +37,15 @@ const Profile = () => {
       <View className=' w-full items-center'>
         <NavbarCom
           rightIcon={icons.logout}
+          leftIcon={icons.admin}
+          leftIconPress={() => router.push("/create/upload")}
           title={"My Account"}
           titleStyle={'text-black text-[16px] font-psemibold'}
           rightIconStyle={'w-6 h-6'}
           rightIconPress={logout}
         />
         <Image
-          source={{uri: user.avatar}}
+          source={user ? {uri: user.avatar} : ""}
           className='w-20 h-20'
           borderRadius={100}
         />

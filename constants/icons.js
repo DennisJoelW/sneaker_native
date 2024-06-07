@@ -18,6 +18,7 @@ import add from "../assets/icons/add.png";
 import back from "../assets/icons/back.png";
 import notFound from "../assets/icons/not-found.png";
 import favorite from "../assets/icons/favorite.png";
+import admin from "../assets/icons/admin.png";
 import favorite_filled from "../assets/icons/favorite_filled.png";
 
 
@@ -44,5 +45,6 @@ export default {
   back,
   notFound,
   favorite,
-  favorite_filled
+  favorite_filled,
+  admin
 };

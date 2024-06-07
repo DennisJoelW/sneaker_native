@@ -13,6 +13,7 @@ const SneakerDetail = () => {
   const { id, sneakers } = useLocalSearchParams();
 
   const [sizePicked, setSizePicked] = useState("")
+  const [star, setStar] = useState(false)
 
   const sneakerData = sneakers ? JSON.parse(sneakers) : {};
 
@@ -72,11 +73,12 @@ const SneakerDetail = () => {
     )
   }
 
-  console.log(sneakerData)
 
   return (
     <SafeAreaView className=' flex-1'>
-      <ScrollView className=' px-4'>
+      <ScrollView className=' px-4'
+        showsVerticalScrollIndicator={false}
+      >
 
     <NavbarCom
       title={""}
@@ -111,22 +113,18 @@ const SneakerDetail = () => {
       <Text className=' font-pregular text-[12px] text-justify text-gray-500 mb-3'>Step into style and comfort with our latest collection of sneakers. Designed to keep you on your feet all day, our sneakers blend cutting-edge technology with contemporary fashion, or hanging out with friends, these sneakers are your go-to for unparalleled support and style.</Text>
     </View>
 
-    <View className=' items-end mb-8'>
-      <Text className=' font-psemibold text-[16px] mb-1 '>Size</Text>
-      <View className=' flex-row'>
-        <Size
-            size={"38"}
-          />
-          <Size
-            size={"39"}
-          />
-          <Size
-            size={"40"}
-          />
-          <Size
-            size={"41"}
-          />
-      </View>
+    <View className='items-end mb-8 flex-1 w-full'>
+          <Text className='font-psemibold text-[16px] mb-1'>Size</Text>
+          <View className='items-end h-fit w-[50%]'>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} className='w-full'>
+                <Size size={"39"} />
+                <Size size={"40"} />
+                <Size size={"41"} />
+                <Size size={"42"} />
+                <Size size={"43"} />
+                <Size size={"44"} />
+            </ScrollView>
+          </View>
     </View>
 
     <View className=' flex-row justify-between items-center w-full h-fit mb-10'>
@@ -139,21 +137,19 @@ const SneakerDetail = () => {
 
 
       <View className=' w-[22%] items-center justify-center '>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => setStar(!star)}
+          activeOpacity={0.8}
+        >
           <Image
-            source={icons.favorite}
+            source={star ? icons.favorite_filled : icons.favorite}
             style={{width:35, height:35}}
           />
         </TouchableOpacity>
       </View>
 
     </View>
-
-
-
-
-
-
+    
       </ScrollView>
     </SafeAreaView>
   )

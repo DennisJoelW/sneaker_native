@@ -3,7 +3,7 @@ import React from 'react'
 import icons from '../constants/icons'
 
 
-const NavbarCom = ({leftIcon, rightIcon, title, titleStyle, leftIconPress, rightIconPress, rightIconStyle}) => {
+const NavbarCom = ({leftIcon, rightIcon, title, titleStyle, leftIconPress, rightIconPress, rightIconStyle, leftIconStyle}) => {
     return(
       <View className=' w-[100%] pt-4 flex-row items-center justify-between mb-4'>
 
@@ -13,7 +13,7 @@ const NavbarCom = ({leftIcon, rightIcon, title, titleStyle, leftIconPress, right
         >
             <Image
             source={leftIcon}
-            className=' w-8 h-8 ml-1'
+            className={` w-8 h-8 ml-1 ${leftIconStyle}`}
             tintColor={"black"}
             resizeMode='contain'
             />

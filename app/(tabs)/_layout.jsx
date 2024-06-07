@@ -26,16 +26,19 @@ const TabsLayout = () => {
 
   return (
     <>
-      <Tabs screenOptions={{ 
+      <Tabs className=' bg-white'
+      
+        screenOptions={{ 
         tabBarShowLabel:false,
         tabBarActiveTintColor:"#40A578",
         tabBarHideOnKeyboard:true,
         tabBarStyle:{
-          height: 88,
+          height: 80,
           alignContent: 'center',
           justifyContent: 'center',
           display: 'flex',
           borderTopColor: "black",
+          paddingTop: 10
         }
         }}>
         
