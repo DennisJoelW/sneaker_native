@@ -63,7 +63,6 @@ const upload = () => {
           value={form.sneakersImage}
           placeholder={" Sneakers Image URL"}
           handleOnType={(e) => setform({...form, sneakersImage : e})}
-
         />
 
         <FormField 

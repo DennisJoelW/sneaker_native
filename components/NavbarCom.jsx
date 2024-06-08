@@ -9,13 +9,12 @@ const NavbarCom = ({leftIcon, rightIcon, title, titleStyle, leftIconPress, right
 
         <TouchableOpacity
          onPress={leftIconPress}
-
         >
             <Image
-            source={leftIcon}
-            className={` w-8 h-8 ml-1 ${leftIconStyle}`}
-            tintColor={"black"}
-            resizeMode='contain'
+              source={leftIcon}
+              className={` w-8 h-8 ml-1 ${leftIconStyle}`}
+              tintColor={"black"}
+              resizeMode='contain'
             />
         </TouchableOpacity>
 
