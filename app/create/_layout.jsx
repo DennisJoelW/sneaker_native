@@ -13,12 +13,7 @@ const createLayout = () => {
             headerShown: false
           }}
         />
-        <Stack.Screen
-          name="goblok"
-          options={{
-            headerShown: false
-          }}
-        />
+
       </Stack>
     </>
   )

@@ -95,10 +95,11 @@ const Home = () => {
           </View>
         )}
         ListHeaderComponent={() => (
-          <View className='mb-4'>
+          <SafeAreaView className='mb-4'>
             <NavbarCom
               leftIcon={icons.settings}
               title={"Sneakerz"}
+              styles
             />
             <SearchInput
               extraStyles={"mx-0"}
@@ -143,7 +144,7 @@ const Home = () => {
                 />
               )}
             />
-          </View>
+          </SafeAreaView>
         )}
         refreshControl={<RefreshControl
           refreshing={refreshing}
