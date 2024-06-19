@@ -3,7 +3,7 @@ import React from 'react'
 import icons from '../constants/icons'
 
 
-const NavbarCom = ({leftIcon, rightIcon, title, titleStyle, leftIconPress, rightIconPress, rightIconStyle, leftIconStyle}) => {
+const NavbarCom = ({leftIcon, rightIcon, title, titleStyle, leftIconPress, rightIconPress, rightIconStyle, leftIconStyle, itemCount}) => {
     return(
       <View className=' w-[100%] pt-4 flex-row items-center justify-between mb-4'>
 
@@ -31,6 +31,14 @@ const NavbarCom = ({leftIcon, rightIcon, title, titleStyle, leftIconPress, right
             resizeMode='contain'
             tintColor={'black'}
         />
+
+        {!rightIcon && itemCount ? (
+                  <View className='w-[18px] h-[18px] rounded-full bg-red-600 items-center justify-center absolute top-[-5px] left-[-8px]'>
+                  <Text className=' text-white text-[10px] font-psemibold'>{itemCount}</Text>
+                </View>
+        ) : ""}
+
+
 
     </TouchableOpacity>
       

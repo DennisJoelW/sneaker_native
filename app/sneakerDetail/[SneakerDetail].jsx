@@ -1,11 +1,12 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from 'react-native'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import icons from '../../constants/icons'
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRoute } from '@react-navigation/native';
 import { useLocalSearchParams, useRouter , useParams, router} from 'expo-router';
-import { formatNumberWithCommas } from '../../lib/appwrite';
+import { addSneakerToCart, formatNumberWithCommas, isItemInCart } from '../../lib/appwrite';
 import  CustomButton  from "../../components/CustomButton";
+import { useGlobalContext } from '../../context/GlobalProvider';
 
 const SneakerDetail = () => {
 
@@ -13,9 +14,22 @@ const SneakerDetail = () => {
   const { id, sneakers } = useLocalSearchParams();
 
   const [sizePicked, setSizePicked] = useState("")
-  const [star, setStar] = useState(false)
+
+  const { user, setUser, setIsLoggedIn} =  useGlobalContext()
 
   const sneakerData = sneakers ? JSON.parse(sneakers) : {};
+
+  const [star, setStar] = useState(false);
+  const [itemAdded, setItemAdded] = useState();
+
+  useEffect(() => {
+    const checkCart = async () => {
+      const cart = await isItemInCart(sneakerData.$id, user.accountId);
+      setItemAdded(cart);
+    };
+    checkCart();
+  }, [sneakerData.$id, user.accountId]);
+
 
   const NavbarCom = ({leftIcon, rightIcon, title, titleStyle, leftIconPress, rightIconPress, rightIconStyle, leftIconStyle}) => {
     return(
@@ -130,9 +144,10 @@ const SneakerDetail = () => {
     <View className=' flex-row justify-between items-center w-full h-fit mb-10'>
 
       <CustomButton
-          title={"Add to cart"}
-          containerStyles={" mx-0 mt-1 h-[50px] w-[78%]"}
+          title={itemAdded ? "Delete from cart" : "Add to cart"}
+          containerStyles={itemAdded ? "mx-0 mt-1 h-[50px] w-[78%] bg-[#A91D3A]" :" mx-0 mt-1 h-[50px] w-[78%]"}
           textStyles={" font-pregular text-[16px]"}
+          handlePress={() => addSneakerToCart(sneakerData.$id, user.accountId )}
       />  
 
 

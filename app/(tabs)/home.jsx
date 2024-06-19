@@ -31,8 +31,8 @@ const Home = () => {
   const [sneakers, setSneakers] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  const flatListRef = useRef(null);
-  const pathname = usePathname();
+  const [itemCount, setItemCount] = useState(2)
+
 
   useEffect(() => {
     fetchSneakers();
@@ -99,7 +99,7 @@ const Home = () => {
             <NavbarCom
               leftIcon={icons.settings}
               title={"Sneakerz"}
-              styles
+              itemCount={itemCount}
             />
             <SearchInput
               extraStyles={"mx-0"}

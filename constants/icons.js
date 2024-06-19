@@ -19,6 +19,10 @@ import back from "../assets/icons/back.png";
 import notFound from "../assets/icons/not-found.png";
 import favorite from "../assets/icons/favorite.png";
 import admin from "../assets/icons/admin.png";
+import privacy from "../assets/icons/privacy.png";
+import next from "../assets/icons/next.png";
+import remove from "../assets/icons/remove.png";
+import information from "../assets/icons/information.png";
 import favorite_filled from "../assets/icons/favorite_filled.png";
 
 
@@ -46,5 +50,9 @@ export default {
   notFound,
   favorite,
   favorite_filled,
-  admin
+  admin,
+  privacy,
+  information,
+  next,
+  remove
 };
